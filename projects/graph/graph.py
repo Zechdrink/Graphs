@@ -7,28 +7,57 @@ class Graph:
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
     def __init__(self):
         self.vertices = {}
+
     def add_vertex(self, vertex):
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex] = set()
+
     def add_edge(self, v1, v2):
-        """
-        Add a directed edge to the graph.
-        """
-        pass  # TODO
+        if v1 in self.vertices and v2 in self.vertices:
+            self.vertices[v1].add(v2)
+        else:
+            raise IndexError("That vertex doesn't exist")
+
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
-    def dft(self, starting_vertex):
-        """
-        Print each vertex in depth-first order
-        beginning from starting_vertex.
-        """
-        pass  # TODO
+        # create empty q
+        q = Queue()
+        q.enqueue(starting_vertex)
+        #store vertices storage set
+        visited = set()
+        #while the queue has something dequeue the first vertex then add it to visited
+        while q.size > 0:
+            v = q.dequeue()
+            print(v)
+            visited.add(v)
+            # add all neighbors to back of queue
+            for next_vert in self.vertices[v]:
+                q.enqueue(next_vert)
+
+    # def dft(self, starting_vertex):
+    #     """
+    #     Print each vertex in depth-first order
+    #     beginning from starting_vertex.
+    #     """
+    #     s = Stack()
+    #     s.push(starting_vertex)
+
+    #     visited = set()
+
+    #     while s.size() > 0:
+    #         v = s.pop()
+    #         print(v)
+    #         visited.add(v)
+
+    #         for next_vert in self.vertices[v]:
+    #             s.push(next_vert)
+
+        
     def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
@@ -36,6 +65,7 @@ class Graph:
         This should be done using recursion.
         """
         pass  # TODO
+
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
@@ -43,6 +73,7 @@ class Graph:
         breath-first order.
         """
         pass  # TODO
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
